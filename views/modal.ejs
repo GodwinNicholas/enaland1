@@ -141,20 +141,23 @@
 
 <script>
 
-    // format numbers
-    // add comma to amount
-    var cleaveNumeral = new Cleave('#feeField', {
-        numeral: true,
-        numeralThousandsGroupStyle: 'thousand'
-    });
-    var cleaveNumera2 = new Cleave('#amountField', {
-        numeral: true,
-        numeralThousandsGroupStyle: 'thousand'
-    });
-    var cleaveNumera3 = new Cleave('#balanceField', {
-        numeral: true,
-        numeralThousandsGroupStyle: 'thousand'
-    });
+
+    window.onload = () => {
+        // format numbers
+        // add comma to amount
+        var cleaveNumeral = new Cleave('#feeField', {
+            numeral: true,
+            numeralThousandsGroupStyle: 'thousand'
+        });
+        var cleaveNumera2 = new Cleave('#amountField', {
+            numeral: true,
+            numeralThousandsGroupStyle: 'thousand'
+        });
+        var cleaveNumera3 = new Cleave('#balanceField', {
+            numeral: true,
+            numeralThousandsGroupStyle: 'thousand'
+        });
+    }
 
     setTimeout(() => { initCam() }, 10)
 

@@ -1,8 +1,3 @@
-
-
-
-
-
 // validate transaction form
 
 const amountField = document.querySelector("#amountField");
@@ -18,7 +13,7 @@ const accName = document.querySelector("#accountName"), clientName = document.qu
 
 accName.addEventListener("input", e => {
     clientName.value = e.target.value;
-})
+});
 
 function validateFee() {
     const tr = document.querySelector("#traType");
