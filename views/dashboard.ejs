@@ -1,0 +1,55 @@
+<%- include("navbar") %>
+
+<div class="dashboard">
+    <h3 class="text-center text-bold text-info pt-5">Transactions Dashboard</h3>
+
+    <div class="today mt-3 mb-4">
+        <h4 class="text-center text-bold text-success">Today So Far</h4>
+        <hr>
+        <div class="dashboardT">
+            <div class="rounded">
+                <h4><span class="badge bg-info text-white"><%= transData.numDebitsToday %> </span> Debits </h4>
+                <h3 class="text-warning">N<%= transData.debitsToday %></h3>
+            </div>
+            <div class="rounded">
+                <h4><span class="badge bg-info text-white"><%= transData.numCreditToday %></span> Credits </h4>
+                <h3 class="text-warning">N<%= transData.creditToday %></h3>
+            </div>
+            <div class="rounded">
+                <h4><span class="badge bg-info text-white"><%= transData.numTransToday %> </span> Transfers </h4>
+                <h3 class="text-warning">N<%= transData.transToday %> </h3>
+            </div>
+            <div class="rounded">
+                <h4>Profit</h4>
+                <h3 class="text-success">N<%= transData.profitsToday %></h3>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="today mt-3 mb-4">
+        <h4 class="text-center text-bold text-success">This month</h4>
+        <hr>
+        <div class="dashboardT">
+            <div class="rounded">
+                <h4><span class="badge bg-info text-white"><%= transData.numDebitsThisMonth %> </span> Debits </h4>
+                <h3 class="text-warning">N<%= transData.debitsThisMonth %> </h3>
+            </div>
+            <div class="rounded">
+                <h4><span class="badge bg-info text-white"><%= transData.numCreditThisMonth %> </span> Credits </h4>
+                <h3 class="text-warning">N<%= transData.creditThisMonth %> </h3>
+            </div>
+            <div class="rounded">
+                <h4><span class="badge bg-info text-white"><%= transData.numTransThisMonth %> </span> Transfers </h4>
+                <h3 class="text-warning">N<%= transData.numTransThisMonth %> </h3>
+            </div>
+            <div class="rounded">
+                <h4>Profit </h4>
+                <h3 class="text-success">N<%= transData.profitsThisMonth %></h3>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<%- include("footer") %>

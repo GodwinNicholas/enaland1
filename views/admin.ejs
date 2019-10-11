@@ -1,0 +1,88 @@
+<div>
+    <%- include('navbar', req) %>
+</div>
+<div class="mt-2">
+    <% include ./partials/messages %>
+</div>
+
+<div class="admin">
+    <h1 class="text-center">Admin</h1>
+
+    <hr>
+
+    <div class="all p-5">
+
+        <div class="users-list">
+            <h3 class="">
+                <i class="fas fa-user"></i>
+                Users
+            </h3>
+            <div class="addUser">
+                <a href="/auth/register" class="btn btn-info my-4">
+                    <i class="fas fa-plus"></i>
+                    Add User
+                </a>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Attendant ID</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Active</th>
+                            <th scope="col">Admin</th>
+                            <th scope="col">Cash</th>
+                            <th scope="col">Manage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% users.forEach(user => { %>
+                        <tr>
+                            <td><%= user.attendantID %></td>
+                            <td><%= user.firstname %></td>
+                            <td><%= user.lastname %></td>
+                            <td><%= user.username %></td>
+                            <td><%= user.isActive %></td>
+                            <td><%= user.isAdmin %></td>
+                            <td><%= user.cash %></td>
+                            <td><a href="/users/<%= user.id %>" class="btn btn-info">View</a>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <hr>
+        <div class="settings">
+            <h3>
+                <i class="fas fa-cogs pl-2"></i>
+                Settings
+            </h3>
+
+            <form class="container mt-5" action="/users/<%= req.user.id %>" method="POST">
+                <h4>Admin Advanced Settings</h4>
+                <hr>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Username</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control-plaintext" id="staticEmail"
+                            value="<%= req.user.username %>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputPassword" name="password"
+                            placeholder="Password">
+                    </div>
+                </div>
+                <button class="btn btn-info">Update</button>
+            </form>
+        </div>
+    </div>
+    <div>
+        <%- include('footer') %>
+    </div>

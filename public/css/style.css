@@ -1,0 +1,146 @@
+body{
+    overflow-x: hidden;
+}
+h1,h2,h3,h4{
+    text-transform: uppercase;
+    font-family: 'ABeeZee', sans-serif;
+}
+.firstmoney{
+    font-family: 'ABeeZee', sans-serif;
+}
+
+.firstmoney-logo{
+    height: 4em;
+    width: 12em;
+}
+
+.reg{
+    background: url("../img/firstmonie.jpg");
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+
+.login{
+    height: 100vh;
+    margin: auto;
+}
+
+.login > div {
+    background: transparent;
+}
+
+.logo-wrap{
+    margin: 1em auto;
+    display: block;
+    width: 50%;
+    text-align: center;
+}
+
+.logo {
+    text-align: center;
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+.logo-wrap h2{
+    text-align: left;
+}
+
+.ticket{
+    position: relative;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    text-transform: uppercase;
+}
+
+.ticket > div:nth-child(even){
+    text-align: right;
+    display: block;
+}
+
+.big > *{
+    font-size: 2em;
+    font-weight: bolder;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #fff;
+    color: #000;
+}
+
+.dashboard{
+    background: lightgrey;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.dashboardT{
+    display: flex;
+}
+
+.dashboardT > div{
+    background: #fff;
+    flex-basis: 33%;
+    margin: 1em;
+    padding: 1em;
+}
+
+.smalls{
+    color: #fff;
+    background: #2d3033;
+}
+
+#printableArea{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 100%;
+}
+
+.login-bg{
+    position: relative;
+    background: url(/img/bg5.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: all .6s ease;
+    z-index: 1;
+}
+.login-bg1{
+    position: relative;
+    z-index: 1;
+}
+.dark{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.658);
+}
+
+.captured-image{
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+    padding: 1em 3em;
+    position: relative;
+    border-radius: 20px;
+    margin: auto;
+    display: block;
+}
+
+.captured-image > img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#my_camera{
+    margin: 0 auto .5em -1.9em;
+    padding: 0;
+    width: auto;
+    height: auto;
+}
+
+

@@ -1,0 +1,17 @@
+<!-- show table -->
+
+<div class="header">
+    <%- include('navbar', {req}) %>
+</div>
+<div class="mt-2">
+    <% include ./partials/messages %>
+</div>
+<div>
+    <%- include('table', {trans, user}) %>
+</div>
+
+<footer class="footer">
+    <%- include('footer') %>
+</footer>
+
+</script>
