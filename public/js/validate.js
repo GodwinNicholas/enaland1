@@ -1,11 +1,6 @@
-// update typing names
-
-const accName = document.querySelector("#accountName"), clientName = document.querySelector("#clientName");
 
 
-accName.addEventListener("input", e => {
-    clientName.value = e.target.value;
-})
+
 
 
 // validate transaction form
@@ -15,6 +10,15 @@ const feeField = document.querySelector("#feeField");
 const traField = document.querySelector("#traType");
 const baField = document.querySelector("#baType");
 
+
+// update typing names
+
+const accName = document.querySelector("#accountName"), clientName = document.querySelector("#clientName");
+
+
+accName.addEventListener("input", e => {
+    clientName.value = e.target.value;
+})
 
 function validateFee() {
     const tr = document.querySelector("#traType");
