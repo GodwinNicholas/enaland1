@@ -1,5 +1,3 @@
-
-
 // update typing names
 
 const accName = document.querySelector("#accountName"), clientName = document.querySelector("#clientName");

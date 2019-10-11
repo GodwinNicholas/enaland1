@@ -45,7 +45,7 @@ const tranSchema = new mongoose.Schema({
     },
     customerNum: {
         type: String,
-        required: true,
+        required: false,
         max: 10
     },
     type: {

@@ -31,13 +31,13 @@
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="validationDefaultUsername">Amount</label>
+                            <label for="amountField">Amount</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">(₦)</span>
                                 </div>
-                                <input type="number" name="amount" class="form-control" id="amountField"
-                                    placeholder="Amount" aria-describedby="inputGroupPrepend2" required>
+                                <input name="amount" class="form-control" id="amountField" placeholder="Amount"
+                                    aria-describedby="inputGroupPrepend2" required>
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
@@ -46,8 +46,8 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">(₦)</span>
                                 </div>
-                                <input type="number" name="fee" class="form-control" value=0
-                                    aria-describedby="inputGroupPrepend2" id="feeField" readonly required>
+                                <input name="fee" class="form-control" value=0 aria-describedby="inputGroupPrepend2"
+                                    id="feeField" readonly required>
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
@@ -56,9 +56,9 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroupPrepend2">(₦)</span>
                                 </div>
-                                <input value="<%= user.cash %>" type="number" name="balance" class="form-control"
-                                    id="validationDefaultUsername" placeholder="Account Balance"
-                                    aria-describedby="inputGroupPrepend2" readonly required>
+                                <input value="<%= user.cash %>" name="balance" class="form-control" id="balanceField"
+                                    placeholder="Account Balance" aria-describedby="inputGroupPrepend2" readonly
+                                    required>
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
@@ -89,7 +89,7 @@
                                     <span class="input-group-text" id="inputGroupPrepend2">#</span>
                                 </div>
                                 <input type="number" name="customerNum" class="form-control" id="validationDefaultaccno"
-                                    placeholder="Customer Phone Number" aria-describedby="inputGroupPrepend2" required>
+                                    placeholder="Customer Phone Number" aria-describedby="inputGroupPrepend2">
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
@@ -135,10 +135,26 @@
 
 
 <script src="/js/jquerymin.js"></script>
+<script src="/js/cleave.min.js"></script>
 <script src="/js/webcam.min.js"></script>
 <script src="/js/validate.js"></script>
 
 <script>
+
+    // format numbers
+    // add comma to amount
+    var cleaveNumeral = new Cleave('#feeField', {
+        numeral: true,
+        numeralThousandsGroupStyle: 'thousand'
+    });
+    var cleaveNumera2 = new Cleave('#amountField', {
+        numeral: true,
+        numeralThousandsGroupStyle: 'thousand'
+    });
+    var cleaveNumera3 = new Cleave('#balanceField', {
+        numeral: true,
+        numeralThousandsGroupStyle: 'thousand'
+    });
 
     setTimeout(() => { initCam() }, 10)
 
