@@ -1,11 +1,12 @@
 const Router = require("express").Router();
 const { ensureAuthenticated, ensureIsAdmin } = require("../config/auth");
 const Transaction = require("../models/transactionModel");
+const moment = require("moment");
 
 Router.get("/:id", ensureAuthenticated, (req, res) => {
     const id = req.params.id;
     Transaction.findById(id, (err, ticket) => {
-        return res.render("ticketDetails", { req, ticket });
+        return res.render("ticketDetails", { req, ticket, moment });
     })
 });
 
