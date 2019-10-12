@@ -9,7 +9,7 @@ Router.get("/", ensureAuthenticated, (req, res) => {
     if (!user.isAdmin) {
         Transaction.find({ ["cashier._id"]: user._id }).sort({ date: 1, time: 1 })
             .then(trans => {
-                res.render("home", { trans, req, user });
+                res.render("home", { trans, req, user, moment });
             });
     }
     Transaction.find().sort({ date: -1 })
