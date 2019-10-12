@@ -7,7 +7,7 @@ const moment = require("moment");
 Router.get("/", ensureAuthenticated, (req, res) => {
     const user = req.user;
     if (!user.isAdmin) {
-        Transaction.find({ ["cashier._id"]: user._id }).sort({ date: 1, time: 1 })
+        Transaction.find({ ["cashier._id"]: user._id }).sort({ date: -1 })
             .then(trans => {
                 res.render("home", { trans, req, user, moment });
             });
