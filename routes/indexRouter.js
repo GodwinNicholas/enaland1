@@ -12,10 +12,12 @@ Router.get("/", ensureAuthenticated, (req, res) => {
                 res.render("home", { trans, req, user, moment });
             });
     }
-    Transaction.find().sort({ date: -1 })
-        .then(trans => {
-            res.render("home", { trans, req, user, moment });
-        });
+    else {
+        Transaction.find().sort({ date: -1 })
+            .then(trans => {
+                res.render("home", { trans, req, user, moment });
+            });
+    }
 });
 
 Router.post("/", ensureAuthenticated, (req, res) => {
@@ -39,10 +41,11 @@ Router.post("/", ensureAuthenticated, (req, res) => {
     }
 
     if (errors.length > 0) {
-        Transaction.find()
-            .then(trans => {
-                return res.render("home", { trans, req, user, msg: "Please fill all fields!" });
-            });
+        req.flash(
+            'error_msg',
+            "Please fill all fields"
+        );
+        return res.redirect("/");
     }
 
     const newTransaction = new Transaction({
