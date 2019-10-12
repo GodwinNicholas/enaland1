@@ -58,9 +58,9 @@
                 <div>CARD TYPE <span class="col">:</span></div>
                 <div class=""><%= ticket.card %></div>
                 <div>DATE<span class="col">:</span></div>
-                <div class=""><%= ticket.date %></div>
+                <div class=""><%= moment(ticket.date).format("DD-MM-YYYY") %></div>
                 <div>TIME <span class="col">:</span></div>
-                <div class=""><%= ticket.time %></div>
+                <div class=""><%= moment(ticket.time).format("HH:mm") %></div>
             </div>
             <div style="border-bottom: 1px dotted #000; padding: 2px 1px; width:100%;"></div>
             <div class="ticketfooter">
