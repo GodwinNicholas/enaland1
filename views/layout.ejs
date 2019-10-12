@@ -24,13 +24,20 @@
     <!-- locl js -->
     <script src="/js/jquerymin.js"></script>
     <script src="/js/jquery.PrintArea.js"></script>
+    <script src="/js/cleave.min/js"></script>
     <script src="/js/jquery.dataTables.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script>
 
         $(document).ready(function () {
-            $('#myTable').DataTable();
+            $('#myTable').DataTable({
+                paging: false,
+            });
+        });
+
+        $.extend($.fn.dataTable.defaults, {
+            ordering: false
         });
 
         $(document).ready(function () {

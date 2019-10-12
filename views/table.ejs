@@ -60,15 +60,15 @@
                 <% trans.forEach(function(tr){ %>
 
                 <tr>
-                    <td><%= tr.name %></td>
+                    <td><%= tr.clientName %></td>
                     <td><%= tr.bankName %></td>
                     <td><%= tr.type %></td>
-                    <td><%= tr.amount %></td>
-                    <td><%= tr.fee %></td>
+                    <td id="TableAmountField"><%= tr.amount %></td>
+                    <td id="TableFeeField"><%= tr.fee %></td>
                     <td><%= tr.accNum %></td>
                     <td><%= tr.card %></td>
-                    <td><%= tr.date %></td>
-                    <td><%= tr.time %></td>
+                    <td><%=  moment(tr.date).format("DD-MM-YYYY") %></td>
+                    <td><%= moment(tr.date).format("HH:mm") %></td>
                     <% if(user.isAdmin){ %>
                     <td><%= tr.cashier.firstname %></td>
                     <% }  %>
@@ -127,4 +127,14 @@
         </table>
     </div>
 
+    <script>
+        var cleaveNumera = new Cleave('#TableFeeField', {
+            numeral: true,
+            numeralThousandsGroupStyle: 'thousand'
+        });
+        var cleaveNumera2 = new Cleave('#TableAmountField', {
+            numeral: true,
+            numeralThousandsGroupStyle: 'thousand'
+        });
+    </script>
 </div>

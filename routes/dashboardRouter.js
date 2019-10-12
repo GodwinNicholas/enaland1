@@ -26,7 +26,7 @@ Router.get("/:username?", ensureAuthenticated, ensureIsAdmin, (req, res) => {
         }
 
 
-        Transaction.find({ type: "Debit", date: new Date().toLocaleDateString() }).then(trans => {
+        Transaction.find({ type: "Debit", dateL: new Date().toLocaleDateString() }).then(trans => {
             trans.forEach(t => {
                 // add to debits today
                 transData.debitsToday = parseInt(transData.debitsToday) + parseInt(t.amount);
@@ -34,7 +34,7 @@ Router.get("/:username?", ensureAuthenticated, ensureIsAdmin, (req, res) => {
             })
         }).then(() => {
 
-            Transaction.find({ type: "Credit", date: new Date().toLocaleDateString() })
+            Transaction.find({ type: "Credit", dateL: new Date().toLocaleDateString() })
                 .then(trans => {
                     trans.forEach(tran => {
                         transData.creditToday = parseInt(transData.creditToday) + parseInt(tran.amount);
@@ -43,7 +43,7 @@ Router.get("/:username?", ensureAuthenticated, ensureIsAdmin, (req, res) => {
                     })
                 })
         }).then(() => {
-            Transaction.find({ card: "Transfer", date: new Date().toLocaleDateString() })
+            Transaction.find({ card: "Transfer", dateL: new Date().toLocaleDateString() })
                 .then(trans => {
                     trans.forEach(tran => {
                         transData.transToday = parseInt(transData.transToday) + parseInt(tran.amount);

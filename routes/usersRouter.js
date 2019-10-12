@@ -21,7 +21,7 @@ Router.post("/:id", ensureAuthenticated, ensureIsAdmin, (req, res) => {
     if (cash) {
         Users.updateOne(
             { _id: userId },
-            { cash },
+            { cash: cash.replace(/[-,]/g, "") },
             { upsert: true }
         ).then(() => {
             req.flash(

@@ -2,7 +2,7 @@ const Router = require("express").Router();
 const Transaction = require("../models/transactionModel");
 const User = require("../models/userModel");
 const { ensureAuthenticated } = require('../config/auth');
-const getDate = require("../utilities/getTime");
+const moment = require("moment");
 
 Router.get("/", ensureAuthenticated, (req, res) => {
     const user = req.user;
@@ -12,9 +12,9 @@ Router.get("/", ensureAuthenticated, (req, res) => {
                 res.render("home", { trans, req, user });
             });
     }
-    Transaction.find().sort({ date: 1, time: 1 })
+    Transaction.find().sort({ date: -1 })
         .then(trans => {
-            res.render("home", { trans, req, user });
+            res.render("home", { trans, req, user, moment });
         });
 });
 
@@ -26,7 +26,7 @@ Router.post("/", ensureAuthenticated, (req, res) => {
     let errors = [];
 
 
-    if (!name || !clientName || !amount || !fee || !bankName || !refNum || !accNum || !customerNum || !type || !status || !card) {
+    if (!name || !clientName || !amount || !fee || !bankName || !refNum || !accNum || !type || !status || !card) {
         errors.push({ msg: 'Password fill all fields' })
     }
 
@@ -48,37 +48,34 @@ Router.post("/", ensureAuthenticated, (req, res) => {
     const newTransaction = new Transaction({
         name,
         clientName,
-        amount: amount.replace("-", ""),
-        fee: fee.replace("-", ""),
+        amount: amount.replace(/[-,]/g, ""),
+        fee: fee.replace(/[-,]/g, ""),
         imgURI,
         bankName,
-        refNum: refNum.replace("-", ""),
-        accNum: accNum.replace("-", ""),
-        customerNum: customerNum.replace("-", ""),
+        refNum: refNum.replace(/[-,]/g, ""),
+        accNum: accNum.replace(/[-,]/g, ""),
+        customerNum: customerNum.replace(/[-,]/g, ""),
         type,
         status,
         card,
         cashBal: user.cash,
         cashier: user
-    });
+    })
+
+
+
 
     newTransaction.save()
         .then(() => {
-            const date = new Date(getDate());
-            newTransaction.date = date.toLocaleDateString();
-            newTransaction.time = date.toLocaleTimeString();
-            newTransaction.month = date.getMonth() + 1;
-        })
-        .then(() => {
             // deduct user balance
             if (type == "Debit") {
-                const newCash = user.cash - amount;
+                const newCash = user.cash - parseInt(amount.replace(/[-,]/g, ""));
                 User.updateOne({ username: user.username }, { cash: newCash }, { upsert: true }).then(user => {
                     console.log("");
                 })
             }
             if (type == "Credit") {
-                const newCash = parseInt(user.cash) + parseInt(amount);
+                const newCash = parseInt(user.cash) + parseInt(amount.replace(/[-,]/g, ""));
                 User.updateOne({ username: user.username }, { cash: newCash }, { upsert: true }).then(user => {
                     console.log("");
                 })
@@ -99,7 +96,7 @@ Router.post("/", ensureAuthenticated, (req, res) => {
             res.redirect("/");
         })
 
-});
+})
 
 
 module.exports = Router;

@@ -1,9 +1,10 @@
 // validate transaction form
 
-const amountField = document.querySelector("#amountField");
+const amountField = document.querySelector("#amountField")
 const feeField = document.querySelector("#feeField");
 const traField = document.querySelector("#traType");
 const baField = document.querySelector("#baType");
+const cardType = document.querySelector("#cardType");
 
 
 // update typing names
@@ -18,33 +19,34 @@ accName.addEventListener("input", e => {
 function validateFee() {
     const tr = document.querySelector("#traType");
     const ba = document.querySelector("#baType");
+    const cType = document.querySelector("#cardType");
     const traFieldVal = tr[tr.options.selectedIndex].value;
-    const bankName = ba[ba.options.selectedIndex].value;
+    const cardType = cType[cType.options.selectedIndex].value;
 
     // if the transaction type is credit
 
-    if (parseInt(amountField.value) <= 11000 && traFieldVal == "Credit") {
+    if (parseInt(amountField.value.replace(/[-,]/g, "")) <= 11000 && traFieldVal == "Credit") {
         feeField.value = 100
     }
-    else if (parseInt(amountField.value) <= 21000 && traFieldVal == "Credit") {
+    else if (parseInt(amountField.value.replace(/[-,]/g, "")) <= 21000 && traFieldVal == "Credit") {
         feeField.value = 200
     }
-    else if (parseInt(amountField.value) <= 40000 && traFieldVal == "Credit") {
+    else if (parseInt(amountField.value.replace(/[-,]/g, "")) <= 40000 && traFieldVal == "Credit") {
         feeField.value = 300
     }
-    else if (parseInt(amountField.value) <= 70000 && traFieldVal == "Credit") {
+    else if (parseInt(amountField.value.replace(/[-,]/g, "")) <= 70000 && traFieldVal == "Credit") {
         feeField.value = 400
     }
-    else if (parseInt(amountField.value) <= 70000 && traFieldVal == "Credit") {
+    else if (parseInt(amountField.value.replace(/[-,]/g, "")) <= 70000 && traFieldVal == "Credit") {
         feeField.value = 500
     }
-    else if (parseInt(amountField.value) <= 100000 && traFieldVal == "Credit") {
+    else if (parseInt(amountField.value.replace(/[-,]/g, "")) <= 100000 && traFieldVal == "Credit") {
         feeField.value = 500
     }
-    else if (parseInt(amountField.value) <= 150000 && traFieldVal == "Credit") {
+    else if (parseInt(amountField.value.replace(/[-,]/g, "")) <= 150000 && traFieldVal == "Credit") {
         feeField.value = 700
     }
-    else if (parseInt(amountField.value) <= 20000000000 && traFieldVal == "Credit") {
+    else if (parseInt(amountField.value.replace(/[-,]/g, "")) <= 2000000000 && traFieldVal == "Credit") {
         feeField.value = 800
     }
 
@@ -52,7 +54,7 @@ function validateFee() {
     // if the transaction type is debit
     // check bank type
 
-    if (traFieldVal == "Debit") {
+    if (traFieldVal == "Debit" || cardType == "Transfer" || cardType == "Cash") {
         feeField.value = 0
     }
 
@@ -61,5 +63,6 @@ function validateFee() {
 amountField.addEventListener("input", validateFee);
 traField.addEventListener("input", validateFee);
 baField.addEventListener("input", validateFee);
+cardType.addEventListener("input", validateFee);
 
 

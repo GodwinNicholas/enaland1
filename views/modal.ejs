@@ -24,11 +24,9 @@
                                 placeholder="Client's Name" required>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="inputStatus">Bank Name</label>
-                            <select class="form-control" id="baType" name="bankName">
-                                <option selected>FirstBank</option>
-                                <option>Other</option>
-                            </select>
+                            <label for="bankName">Bank Name</label>
+                            <input name="bankName" type="text" class="form-control" id="bankName" value="firstbank"
+                                required>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="amountField">Amount</label>
@@ -101,7 +99,7 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="inputStatus">Card Type</label>
-                            <select class="form-control" name="card">
+                            <select class="form-control" name="card" id="cardType">
                                 <option selected>Verve</option>
                                 <option>Mastercard</option>
                                 <option>Visa</option>
@@ -112,8 +110,8 @@
                         <div class="col-md-6 mb-3">
                             <label for="inputStatus">Transaction Status</label>
                             <select id="inputStatus" class="form-control" name="status">
-                                <option selected>Pending</option>
-                                <option>Success</option>
+                                <option>Pending</option>
+                                <option selected>Success</option>
                                 <option>Declined</option>
                             </select>
 
@@ -134,8 +132,6 @@
 
 
 
-<script src="/js/jquerymin.js"></script>
-<script src="/js/cleave.min.js"></script>
 <script src="/js/webcam.min.js"></script>
 <script src="/js/validate.js"></script>
 
