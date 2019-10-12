@@ -46,7 +46,7 @@
                 <div>BANK NAME <span class="col">:</span></div>
                 <div><%= ticket.bankName %></div>
                 <div>PHONE NUMBER:</div>
-                <div class=""><%= ticket.customerNum %></div>
+                <div class=""><%= ticket.customerNum || "None" %></div>
                 <div>TRANSACTION TYPE <span class="col">:</span></div>
                 <div><%- ticket.type %></div>
                 <div>Status <span class="col">:</span></div>
@@ -73,7 +73,7 @@
                     </span>
                     <span class="text-center">
                         <i class="fas fa-envelope pl-1"></i>
-                        enalandlimited@gmail.com
+                        support@enaland.com
                     </span></p>
                 <p class="text-center">Thanks for your patronage</p>
                 <div style="border-bottom: 1px dotted #000; padding: 2px 1px; width:100%;"></div>
