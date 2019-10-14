@@ -13,10 +13,14 @@ accName.addEventListener("input", e => {
     clientName.value = e.target.value;
 });
 
+clientName.onfocus = () => {
+    clientName.selectionStart = 0;
+    clientName.selectionEnd = clientName.value.length;
+}
+
 
 function validateFee() {
     const tr = document.querySelector("#traType");
-    const ba = document.querySelector("#baType");
     const cType = document.querySelector("#cardType");
     const traFieldVal = tr[tr.options.selectedIndex].value;
     const cardType = cType[cType.options.selectedIndex].value;
