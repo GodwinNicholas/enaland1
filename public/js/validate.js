@@ -6,15 +6,13 @@ const traField = document.querySelector("#traType");
 const baField = document.querySelector("#baType");
 const cardType = document.querySelector("#cardType");
 
-
 // update typing names
-
 const accName = document.querySelector("#accountName"), clientName = document.querySelector("#clientName");
-
 
 accName.addEventListener("input", e => {
     clientName.value = e.target.value;
 });
+
 
 function validateFee() {
     const tr = document.querySelector("#traType");
@@ -62,7 +60,6 @@ function validateFee() {
 
 amountField.addEventListener("input", validateFee);
 traField.addEventListener("input", validateFee);
-baField.addEventListener("input", validateFee);
 cardType.addEventListener("input", validateFee);
 
 

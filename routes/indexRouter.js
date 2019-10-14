@@ -23,7 +23,7 @@ Router.get("/", ensureAuthenticated, (req, res) => {
 Router.post("/", ensureAuthenticated, (req, res) => {
     const user = req.user
 
-    const { name, clientName, imgURI, amount, fee, bankName, refNum, accNum, customerNum, type, status, card } = req.body;
+    const { name, clientName, imgURI, date, amount, fee, bankName, refNum, accNum, customerNum, type, status, card } = req.body;
 
     let errors = [];
 
@@ -62,7 +62,8 @@ Router.post("/", ensureAuthenticated, (req, res) => {
         status,
         card,
         cashBal: user.cash,
-        cashier: user
+        cashier: user,
+        date
     })
 
 

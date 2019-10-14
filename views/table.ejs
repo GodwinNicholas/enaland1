@@ -3,7 +3,8 @@
 <div class="mt-4 mb-5 mx-4">
     <h2 class="my-4">Transaction Records</h2>
     <div class="actions my-3">
-        <button type="button" class="btn btn-primary addbtn" data-toggle="modal" data-target="#exampleModal">
+        <button type="button" class="btn btn-primary addbtn" id="openModal" data-toggle="modal"
+            data-target="#exampleModal">
             <i class="fas fa-plus pl-2"></i>
             Add Record
         </button>
@@ -128,6 +129,12 @@
     </div>
 
     <script>
+
+        const modalBtn = document.querySelector("#openModal");
+        const dateInput = document.querySelector("#dateInput");
+        // update date input
+        setInterval(() => dateInput.value = new Date(), 5000);
+
         var cleaveNumera = new Cleave('#TableFeeField', {
             numeral: true,
             numeralThousandsGroupStyle: 'thousand'
