@@ -48,13 +48,55 @@
 </nav>
 
 
-<div class="mt-2">
-    <% include ./partials/messages %>
-</div>
-<div>
-    <%- include('table', {trans, user, moment}) %>
+<div class="project-wrapper">
+
+    <% if(!project){ %>
+
+
+    <div class="container sorryText">
+        <h3 class="text-center">Sorry you have no projects, yet.</h3>
+        <button class="btn btn-info p-3">
+            <i class="fas fa-plus"></i>
+            Add Project
+        </button>
+    </div>
+
+
+    <% } else{ %>
+    <div class="container mt-3">
+        <div class="container container ">
+            <button class="btn btn-info p-2">
+                <i class="fas fa-plus"></i>
+                New Project
+            </button>
+        </div>
+    </div>
+    <div class="project-list row container mx-auto mt-4">
+
+        <div class="card col-md-5 mx-auto" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                <a href="#" class="btn btn-info card-link">Details</a>
+            </div>
+        </div>
+        <div class="card col-md-5 mx-auto" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                <a href="#" class="btn btn-info card-link">Details</a>
+            </div>
+        </div>
+
+    </div>
+    <% } %>
+
+
 </div>
 
-<footer class="footer">
-    <%- include('footer') %>
-</footer>
+
+<%- include("../footer") %>

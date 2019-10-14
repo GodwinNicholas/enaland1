@@ -19,6 +19,12 @@ const usersRouter = require("./routes/usersRouter");
 const authRouter = require("./routes/authRouter");
 const ticketRouter = require("./routes/ticketRouter");
 
+// import routes for budget
+const projectIndexRouter = require("./routes/project/index");
+const projectCreateRouter = require("./routes/project/createProject");
+const projectDeleteRouter = require("./routes/project/deleteproject");
+const projectDetailsRouter = require("./routes/project/projectDetail");
+
 // middlewares
 app.use(expressLayouts);
 app.use(express.static(path.join(__dirname, "public")));
@@ -80,6 +86,9 @@ app.use("/dashboard", dashboardRouter);
 app.use("/users", usersRouter);
 app.use("/auth", authRouter);
 app.use("/ticket", ticketRouter);
+
+// budget routes
+app.use("/project", projectIndexRouter);
 // app.user("*", "notFound")
 
 

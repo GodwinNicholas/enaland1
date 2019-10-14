@@ -63,7 +63,9 @@ Router.post("/", ensureAuthenticated, (req, res) => {
         card,
         cashBal: user.cash,
         cashier: user,
-        date
+        date,
+        dateL: new Date(date).toLocaleDateString(),
+        month: new Date(date).getMonth() + 1
     })
 
 
