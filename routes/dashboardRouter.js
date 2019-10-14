@@ -59,27 +59,27 @@ Router.get("/:username?", ensureAuthenticated, ensureIsAdmin, (req, res) => {
                         transData.debitsThisMonth = parseInt(transData.debitsThisMonth) + parseInt(t.amount);
                         transData.numDebitsThisMonth += 1;
                     })
-                }).then(() => {
-                    // credits this month
-                    Transaction.find({ type: "Credit", month: new Date().getMonth() + 1 })
-                        .then(trans => {
-                            trans.forEach(tran => {
-                                transData.creditThisMonth = parseInt(transData.creditThisMonth) + parseInt(tran.amount);
-                                transData.numCreditThisMonth += 1;
-                                transData.profitsThisMonth = parseInt(transData.profitsThisMonth) + parseInt(tran.fee);
-                            })
-                        })
-                }).then(() => {
-                    Transaction.find({ card: "Transfer", month: new Date().getMonth() + 1 })
-                        .then(trans => {
-                            trans.forEach(tran => {
-                                transData.transThisMonth = parseInt(transData.transThisMonth) + parseInt(tran.amount);
-                                transData.numTransThisMonth += 1;
-                            })
-                        }).then(() => {
-                            return res.render("dashboard", { req, transData });
-                        })
                 })
+            }).then(() => {
+                // credits this month
+                Transaction.find({ type: "Credit", month: new Date().getMonth() + 1 })
+                    .then(trans => {
+                        trans.forEach(tran => {
+                            transData.creditThisMonth = parseInt(transData.creditThisMonth) + parseInt(tran.amount);
+                            transData.numCreditThisMonth += 1;
+                            transData.profitsThisMonth = parseInt(transData.profitsThisMonth) + parseInt(tran.fee);
+                        })
+                    })
+            }).then(() => {
+                Transaction.find({ card: "Transfer", month: new Date().getMonth() + 1 })
+                    .then(trans => {
+                        trans.forEach(tran => {
+                            transData.transThisMonth = parseInt(transData.transThisMonth) + parseInt(tran.amount);
+                            transData.numTransThisMonth += 1;
+                        })
+                    }).then(() => {
+                        return res.render("dashboard", { req, transData });
+                    })
             })
     }
 });
