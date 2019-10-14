@@ -77,11 +77,9 @@ const tranSchema = new mongoose.Schema({
     },
     dateL: {
         type: Date,
-        default: new Date().toLocaleDateString()
     },
     month: {
         type: Date,
-        default: new Date().getMonth() + 1
     }
 });
 
