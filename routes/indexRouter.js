@@ -13,7 +13,7 @@ Router.get("/", ensureAuthenticated, (req, res) => {
             });
     }
     else {
-        Transaction.find().sort({ date: -1 })
+        Transaction.find({ date: Date.now() }).sort({ date: -1 })
             .then(trans => {
                 res.render("home", { trans, req, user, moment });
             });
