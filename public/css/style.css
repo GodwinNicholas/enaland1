@@ -162,3 +162,59 @@ h1,h2,h3,h4{
     text-align: center;
     justify-content: center;
 }
+
+
+/* project */
+
+.create-wrapper{
+    background: rgba(0, 0, 0, 0.63);
+    min-height: 100vh;
+    position: relative;
+}
+
+.create-wrapper::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url(/img/bg5.jpg);
+    z-index: -1;
+    padding: 3em 0;
+}
+
+.c-header {
+    color: #fff;
+    padding-top: 20px;
+}
+
+.category-item{
+    display: inline-block;
+    list-style: none;
+    padding: 5px;
+    background: #fff;
+    color: #000;
+    margin: auto .3em .3em auto;
+}
+
+.category-holder{
+    /* display: flex; */
+}
+
+
+.expense-grid{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-gap: 1%;
+    margin: 2em auto;
+}
+
+.expense-grid > div {
+    background: rgb(163, 160, 160);
+    padding: 10px;
+    color: #fff;
+}
+
+.action-btn{
+    text-align: right;
+    width: 100%;
+}

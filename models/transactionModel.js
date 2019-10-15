@@ -73,7 +73,6 @@ const tranSchema = new mongoose.Schema({
     },
     date: {
         type: Date,
-        default: new Date
     },
     dateL: {
         type: Date,

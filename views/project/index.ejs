@@ -11,9 +11,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav m-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/">
-                    Home <span class="sr-only">(current)</span>
+                    Home
                 </a>
             </li>
 
@@ -24,8 +24,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/project">
-                    Projects
+                <a class="nav-link active" href="/project">
+                    Projects <span class="sr-only">(current)</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -55,48 +55,48 @@
 
     <div class="container sorryText">
         <h3 class="text-center">Sorry you have no projects, yet.</h3>
-        <button class="btn btn-info p-3">
+        <a href="/project/create" class="btn btn-info p-2">
             <i class="fas fa-plus"></i>
-            Add Project
-        </button>
+            New Project
+        </a>
     </div>
 
 
     <% } else{ %>
     <div class="container mt-3">
-        <div class="container container ">
-            <button class="btn btn-info p-2">
+        <div class="container">
+            <a href="/project/create" class="btn btn-info p-2">
                 <i class="fas fa-plus"></i>
-                New Project
-            </button>
+                Add Project
+            </a>
         </div>
-    </div>
-    <div class="project-list row container mx-auto mt-4">
-
-        <div class="card col-md-5 mx-auto" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="#" class="btn btn-info card-link">Details</a>
+        <div class="container expense-grid">
+            <div class="bg-info">
+                <div>
+                    <h2>Budget 1</h2>
+                    <h1 class="lead text-warning">Total Budget - (N) 40000</h1>
+                    <h1 class="lead text-warning">Budget Left - (N) 40000</h1>
+                </div>
+            </div>
+            <div class="bg-info">
+                <div>
+                    <h2>Budget 2</h2>
+                    <h1 class="lead text-warning">Total Budget - (N) 40000</h1>
+                    <h1 class="lead text-warning">Budget Left - (N) 40000</h1>
+                </div>
+            </div>
+            <div class="bg-info">
+                <div>
+                    <h2>Budget 3</h2>
+                    <h1 class="lead text-warning">Total Budget - (N) 40000</h1>
+                    <h1 class="lead text-warning">Budget Left - (N) 40000</h1>
+                </div>
             </div>
         </div>
-        <div class="card col-md-5 mx-auto" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="#" class="btn btn-info card-link">Details</a>
-            </div>
-        </div>
+        <% } %>
+
 
     </div>
-    <% } %>
 
 
-</div>
-
-
-<%- include("../footer") %>
+    <%- include("../footer") %>

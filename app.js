@@ -22,8 +22,8 @@ const ticketRouter = require("./routes/ticketRouter");
 // import routes for budget
 const projectIndexRouter = require("./routes/project/index");
 const projectCreateRouter = require("./routes/project/createProject");
-const projectDeleteRouter = require("./routes/project/deleteproject");
-const projectDetailsRouter = require("./routes/project/projectDetail");
+const projectDetailRouter = require("./routes/project/projectDetail");
+// rs
 
 // middlewares
 app.use(expressLayouts);
@@ -89,9 +89,11 @@ app.use("/ticket", ticketRouter);
 
 // budget routes
 app.use("/project", projectIndexRouter);
+app.use("/project/create", projectCreateRouter);
+app.use("/project/detail", projectDetailRouter);
 // app.user("*", "notFound")
 
 
-app.listen(port, "0.0.0.0", () => console.log(`Server started on port ${port}`))
+app.listen(port, () => console.log(`Server started on port ${port}`))
 
 

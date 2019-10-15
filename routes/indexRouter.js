@@ -29,7 +29,7 @@ Router.post("/", ensureAuthenticated, (req, res) => {
 
 
     if (!name || !clientName || !amount || !fee || !bankName || !refNum || !accNum || !type || !status || !card) {
-        errors.push({ msg: 'Password fill all fields' })
+        errors.push({ msg: 'Please fill all fields' })
     }
 
     if (type == "Debit" && parseInt(user.cash) < amount) {
