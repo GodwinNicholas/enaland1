@@ -11,7 +11,7 @@ Router.get("/", ensureAuthenticated, ensureIsAdmin, (req, res) => {
 
 Router.post("/", ensureAuthenticated, ensureIsAdmin, (req, res) => {
     const errors = [];
-    const { name, budget } = req.body;
+    const { name, budget, category } = req.body;
 
     if (!name || !budget) {
         errors.push({ msg: 'Please fill all fields' });
@@ -29,7 +29,8 @@ Router.post("/", ensureAuthenticated, ensureIsAdmin, (req, res) => {
 
     const newProject = new Project({
         name,
-        budget: amount.replace(/[-,a-zA-Z]/g, "")
+        budget: amount.replace(/[-,a-zA-Z]/g, ""),
+        category: "".split(category)
     });
 
     if (newProject.budget == "") newProject.budget = 0;

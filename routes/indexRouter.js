@@ -7,13 +7,13 @@ const moment = require("moment");
 Router.get("/", ensureAuthenticated, (req, res) => {
     const user = req.user;
     if (!user.isAdmin) {
-        Transaction.find({ ["cashier._id"]: user._id, date: Date.now() }).sort({ date: -1 })
+        Transaction.find({ ["cashier._id"]: user._id, month: new Date().getMonth() + 1, day: new Date().getDate() }).sort({ date: -1 })
             .then(trans => {
                 res.render("home", { trans, req, user, moment });
             });
     }
     else {
-        Transaction.find({ date: Date.now() }).sort({ date: -1 })
+        Transaction.find({ month: new Date().getMonth() + 1, day: new Date().getDate() }).sort({ date: -1 })
             .then(trans => {
                 res.render("home", { trans, req, user, moment });
             });
@@ -64,6 +64,7 @@ Router.post("/", ensureAuthenticated, (req, res) => {
         cashBal: user.cash,
         cashier: user,
         date,
+        day: new Date(date).getDate(),
         dateL: new Date(date).toLocaleDateString(),
         month: new Date(date).getMonth() + 1
     })
