@@ -13,7 +13,6 @@ Router.get("/:id", ensureAuthenticated, ensureIsAdmin, (req, res) => {
         })
 });
 
-
 Router.post("/:id", ensureAuthenticated, ensureIsAdmin, (req, res) => {
     const userId = req.params.id;
     let { cash, password } = req.body;
@@ -45,13 +44,12 @@ Router.post("/:id", ensureAuthenticated, ensureIsAdmin, (req, res) => {
                         'success_msg',
                         'User password Updated'
                     );
-                    return res.redirect("/admin")
                 });
             });
         });
     }
 
-    return res.redirect("/")
+    return res.redirect("/admin")
 });
 
 Router.post("/delete/:id", ensureAuthenticated, ensureIsAdmin, (req, res) => {
@@ -99,6 +97,7 @@ Router.post("/enable/:id", ensureAuthenticated, ensureIsAdmin, (req, res) => {
         return res.redirect("/admin")
     });
 });
+
 
 
 module.exports = Router;

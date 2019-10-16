@@ -10,15 +10,9 @@ Router.get("/", ensureAuthenticated, ensureIsAdmin, (req, res) => {
 
 
 Router.post("/", ensureAuthenticated, ensureIsAdmin, (req, res) => {
-    const errors = [];
     const { name, budget, category } = req.body;
 
-    if (!name || !budget) {
-        errors.push({ msg: 'Please fill all fields' });
-        return res.redirect("/project/create");
-    }
-
-    if (errors.length > 0) {
+    if (!name || !budget || !category) {
         req.flash(
             'error_msg',
             "Please fill all fields"
@@ -26,18 +20,17 @@ Router.post("/", ensureAuthenticated, ensureIsAdmin, (req, res) => {
         return res.redirect("/project/create");
     }
 
-
+    console.log(category)
     const newProject = new Project({
         name,
-        budget: amount.replace(/[-,a-zA-Z]/g, ""),
-        category: "".split(category)
+        budget: budget.replace(/[-,a-zA-Z]/g, ""),
+        category: category.split(" "),
+        budgetRemain: budget.replace(/[-,a-zA-Z]/g, ""),
     });
-
-    if (newProject.budget == "") newProject.budget = 0;
 
     newProject.save()
         .then((project) => {
-            return res.redirect("/project/" + project._id);
+            return res.redirect("/project/detail/" + project._id);
         })
 })
 

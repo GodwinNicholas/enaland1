@@ -45,90 +45,180 @@
     </div>
 </nav>
 
+<div class="wapp" style="height: 100vh;">
+
+    <div class="row" style="height: 100%;">
+
+        <div class="col-3 bg-dark">
+            <div class="nav flex-column nav-pills p-2" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
+                    aria-controls="v-pills-home" aria-selected="true">Users</a>
+                <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
+                    aria-controls="v-pills-profile" aria-selected="false">Interaccount</a>
+                <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
+                    aria-controls="v-pills-settings" aria-selected="false">Admin Settings</a>
+            </div>
+        </div>
 
 
-<div class="mt-2">
-    <% include ./partials/messages %>
+        <div class="col-9">
+            <div class="tab-content p-3" id="v-pills-tabContent">
+                <!-- users -->
+                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                    aria-labelledby="v-pills-home-tab">
+                    <div class="users-list">
+                        <div class="mt-2">
+                            <% include ./partials/messages %>
+                        </div>
+                        <h3 class="">
+                            <i class="fas fa-user"></i>
+                            Users
+                        </h3>
+                        <div class="addUser">
+                            <a href="/auth/register" class="btn btn-info my-4">
+                                <i class="fas fa-plus"></i>
+                                Add User
+                            </a>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Attendant ID</th>
+                                        <th scope="col">First Name</th>
+                                        <th scope="col">Last Name</th>
+                                        <th scope="col">Username</th>
+                                        <th scope="col">Active</th>
+                                        <th scope="col">Admin</th>
+                                        <th scope="col">Cash</th>
+                                        <th scope="col">Manage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% users.forEach(user => { %>
+                                    <tr>
+                                        <td><%= user.attendantID %></td>
+                                        <td><%= user.firstname %></td>
+                                        <td><%= user.lastname %></td>
+                                        <td><%= user.username %></td>
+                                        <td><%= user.isActive %></td>
+                                        <td><%= user.isAdmin %></td>
+                                        <td><%= user.cash %></td>
+                                        <td><a href="/users/<%= user.id %>" class="btn btn-info">View</a>
+                                    </tr>
+                                    <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                    <!-- interaccount -->
+                    <div class="p-3 container">
+                        <form action="/admin/transaction" method="POST" class="container">
+                            <div class="col-md-12 mb-3">
+                                <label for="inputStatus">User</label>
+                                <select id="inputStatus" class="form-control" name="user">
+                                    <option selected></option>
+
+                                    <% users.forEach(user => { %>
+                                    <option value="<%= user._id %>"><%= user.firstname %> <%= user.lastname %>
+                                        (<%= user.cash %>)</option>
+                                    <% }) %>
+                                </select>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="inputStatus">Transaction</label>
+                                <select id="inputStatus" class="form-control" name="transaction">
+                                    <option>Withdraw</option>
+                                    <option selected>Deposit</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="amountField2">Amount</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">(₦)</span>
+                                    </div>
+                                    <input name="amount" class="form-control" id="amountField" placeholder="Amount"
+                                        aria-describedby="inputGroupPrepend2" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="note">Note</label>
+                                <div class="input-group">
+                                    <input name="note" class="form-control" id="note" placeholder="Note..."
+                                        aria-describedby="inputGroupPrepend2" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-info text-white btn-block col-md-6 mx-auto">
+                                Confirm
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                    <div class="settings">
+                        <h3>
+                            <i class="fas fa-cogs pl-2"></i>
+                            Settings
+                        </h3>
+
+                        <form class="container mt-5" action="/users/<%= req.user.id %>" method="POST">
+                            <h4>Admin Advanced Settings</h4>
+                            <hr>
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Username</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control-plaintext rounded px-2" id="staticEmail"
+                                        value="<%= req.user.username %>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" value="" id="inputPassword" name="password"
+                                        placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="cash" class="col-sm-2 col-form-label">Cash</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" value="<%= req.user.cash %>" id="cash" name="cash"
+                                        placeholder="cash">
+                                </div>
+                            </div>
+                            <button class="btn btn-info">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+<div>
+    <%- include('footer') %>
 </div>
 
-<div class="admin">
-    <h1 class="text-center">Admin</h1>
+<script src="/js/cleave.min.js"></script>
+<script>
 
-    <hr>
 
-    <div class="all p-5">
-
-        <div class="users-list">
-            <h3 class="">
-                <i class="fas fa-user"></i>
-                Users
-            </h3>
-            <div class="addUser">
-                <a href="/auth/register" class="btn btn-info my-4">
-                    <i class="fas fa-plus"></i>
-                    Add User
-                </a>
-            </div>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Attendant ID</th>
-                            <th scope="col">First Name</th>
-                            <th scope="col">Last Name</th>
-                            <th scope="col">Username</th>
-                            <th scope="col">Active</th>
-                            <th scope="col">Admin</th>
-                            <th scope="col">Cash</th>
-                            <th scope="col">Manage</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% users.forEach(user => { %>
-                        <tr>
-                            <td><%= user.attendantID %></td>
-                            <td><%= user.firstname %></td>
-                            <td><%= user.lastname %></td>
-                            <td><%= user.username %></td>
-                            <td><%= user.isActive %></td>
-                            <td><%= user.isAdmin %></td>
-                            <td><%= user.cash %></td>
-                            <td><a href="/users/<%= user.id %>" class="btn btn-info">View</a>
-                        </tr>
-                        <% }) %>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <hr>
-        <div class="settings">
-            <h3>
-                <i class="fas fa-cogs pl-2"></i>
-                Settings
-            </h3>
-
-            <form class="container mt-5" action="/users/<%= req.user.id %>" method="POST">
-                <h4>Admin Advanced Settings</h4>
-                <hr>
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Username</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control-plaintext" id="staticEmail"
-                            value="<%= req.user.username %>">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputPassword" name="password"
-                            placeholder="Password">
-                    </div>
-                </div>
-                <button class="btn btn-info">Update</button>
-            </form>
-        </div>
-    </div>
-    <div>
-        <%- include('footer') %>
-    </div>
+    window.onload = () => {
+        // format numbers
+        // add comma to amount
+        var cleaveNum = new Cleave('#amountField', {
+            numeral: true,
+            numeralThousandsGroupStyle: 'thousand'
+        });
+        var cleaveNum2 = new Cleave('#cash', {
+            numeral: true,
+            numeralThousandsGroupStyle: 'thousand'
+        });
+    }
+</script>

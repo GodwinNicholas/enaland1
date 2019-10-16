@@ -10,9 +10,13 @@ const projectSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    budgetRemain: {
+        type: String,
+        required: true
+    },
     expenses: {
-        type: Object,
-        required: false
+        type: Array,
+        default: []
     },
     category: {
         type: Object,

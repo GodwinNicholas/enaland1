@@ -9,16 +9,39 @@ Router.get("/", ensureAuthenticated, (req, res) => {
     if (!user.isAdmin) {
         Transaction.find({ ["cashier._id"]: user._id, month: new Date().getMonth() + 1, day: new Date().getDate() }).sort({ date: -1 })
             .then(trans => {
-                res.render("home", { trans, req, user, moment });
+                return res.render("home", { trans, req, user, moment });
             });
     }
     else {
         Transaction.find({ month: new Date().getMonth() + 1, day: new Date().getDate() }).sort({ date: -1 })
             .then(trans => {
-                res.render("home", { trans, req, user, moment });
+                return res.render("home", { trans, req, user, moment });
             });
     }
 });
+
+
+
+Router.post("/findByDate", (req, res) => {
+    const user = req.user;
+    const { fromDate, toDate } = req.body;
+    console.log(fromDate, toDate)
+    if (!user.isAdmin) {
+        Transaction.find({ date: { $gte: new Date(`${fromDate}:00`).toISOString(), $lte: new Date(`${toDate}:00`).toISOString() }, ["cashier._id"]: user._id })
+            .then(trans => {
+                return res.render("home", { trans, req, user, moment, fromDate, toDate });
+            })
+    }
+
+    else {
+        Transaction.find({ date: { $gte: new Date(`${fromDate}:00`).toISOString(), $lte: new Date(`${toDate}:00`).toISOString() } })
+            .then(trans => {
+                return res.render("home", { trans, req, user, moment, fromDate, toDate });
+            })
+    }
+});
+
+
 
 Router.post("/", ensureAuthenticated, (req, res) => {
     const user = req.user
@@ -78,13 +101,11 @@ Router.post("/", ensureAuthenticated, (req, res) => {
             if (type == "Debit") {
                 const newCash = user.cash - parseInt(amount.replace(/[-,]/g, ""));
                 User.updateOne({ username: user.username }, { cash: newCash }, { upsert: true }).then(user => {
-                    console.log("");
                 })
             }
             if (type == "Credit") {
                 const newCash = parseInt(user.cash) + parseInt(amount.replace(/[-,]/g, ""));
                 User.updateOne({ username: user.username }, { cash: newCash }, { upsert: true }).then(user => {
-                    console.log("");
                 })
             }
 

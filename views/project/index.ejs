@@ -50,7 +50,7 @@
 
 <div class="project-wrapper">
 
-    <% if(!project){ %>
+    <% if(project.length < 1){ %>
 
 
     <div class="container sorryText">
@@ -71,27 +71,19 @@
             </a>
         </div>
         <div class="container expense-grid">
+
+            <% project.forEach(p =>{ %>
             <div class="bg-info">
                 <div>
-                    <h2>Budget 1</h2>
-                    <h1 class="lead text-warning">Total Budget - (N) 40000</h1>
-                    <h1 class="lead text-warning">Budget Left - (N) 40000</h1>
+                    <h2><%= p.name %></h2>
+                    <hr>
+                    <h1 class="lead text-white">Total Budget - (₦) <%= p.budget %></h1>
+                    <h1 class="lead text-white">Budget Left - (₦) <%= p.budgetRemain %></h1>
+                    <h1 class="lead text-white">Expenses - <%= p.expenses ? p.expenses.length : 0 %></h1>
+                    <a href="/project/detail/<%= p._id %>" class="btn btn-primary">View</a>
                 </div>
             </div>
-            <div class="bg-info">
-                <div>
-                    <h2>Budget 2</h2>
-                    <h1 class="lead text-warning">Total Budget - (N) 40000</h1>
-                    <h1 class="lead text-warning">Budget Left - (N) 40000</h1>
-                </div>
-            </div>
-            <div class="bg-info">
-                <div>
-                    <h2>Budget 3</h2>
-                    <h1 class="lead text-warning">Total Budget - (N) 40000</h1>
-                    <h1 class="lead text-warning">Budget Left - (N) 40000</h1>
-                </div>
-            </div>
+            <% }) %>
         </div>
         <% } %>
 

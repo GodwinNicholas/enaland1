@@ -53,19 +53,19 @@
         <div class="bg-info">
             <div>
                 <h2>Total Budget</h2>
-                <h1 class="display-4 text-warning">(N) 40000</h1>
+                <h1 class="display-4 text-warning">(₦) <%= project.budget %></h1>
             </div>
         </div>
         <div class="bg-info">
             <div>
                 <h2>Budget Left</h2>
-                <h1 class="display-4 text-warning">(N) 40000</h1>
+                <h1 class="display-4 text-warning">(₦) <%= project.budgetRemain %></h1>
             </div>
         </div>
         <div class="bg-info">
             <div>
                 <h2>Total Expenses</h2>
-                <h1 class="display-4 text-warning">3</h1>
+                <h1 class="display-4 text-warning"><%= project.expenses? project.expenses.length : 0 %></h1>
             </div>
         </div>
     </div>
@@ -86,22 +86,20 @@
                 </tr>
             </thead>
             <tbody class="table-secondary">
+                <% if(project.expenses){ %>
+                <% project.expenses.forEach(e => { %>
                 <tr>
-                    <td>Web Design</td>
-                    <td>(N)10000</td>
-                    <td>Transaportation</td>
+                    <td><%= e.expense %></td>
+                    <td>(₦) <%= e.amount %></td>
+                    <td><%= e.category %></td>
                     <td>
                         <a href="/" class="btn btn-danger">Remove</a>
                     </td>
                 </tr>
-                <tr>
-                    <td>Web Design</td>
-                    <td>(N)10000</td>
-                    <td>Transaportation</td>
-                    <td>
-                        <a href="/" class="btn btn-danger">Remove</a>
-                    </td>
-                </tr>
+                <% }) %>
+                <% } %>
+
+
             </tbody>
         </table>
     </div>
@@ -121,13 +119,13 @@
             </div>
             <div class="modal-body">
                 <div id="my_camera" style="width: auto; height: auto;"></div>
-                <form action="/" , method="POST">
+                <form action="/project/detail/expenses/<%= project._id %>" , method="POST">
                     <input type="hidden" name="imgURI" value="" id="result">
                     <input type="hidden" name="date" value="" id="dateInput">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
                             <label for="accountName">Title</label>
-                            <input name="name" type="text" class="form-control" id="accountName"
+                            <input name="newExpense" type="text" class="form-control" id="accountName"
                                 placeholder="Account Name" required>
                         </div>
                         <div class="col-md-12 mb-3">
@@ -142,12 +140,10 @@
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="inputStatus">Category</label>
-                            <select class="form-control" name="card" id="cardType">
-                                <option selected>Verve</option>
-                                <option>Mastercard</option>
-                                <option>Visa</option>
-                                <option>Cash</option>
-                                <option>Transfer</option>
+                            <select class="form-control" name="category" id="cardType">
+                                <% project.category.forEach(c => { %>
+                                <option><%= c %></option>
+                                <% }) %>
                             </select>
                         </div>
                     </div>

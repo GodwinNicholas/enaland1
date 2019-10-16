@@ -1,9 +1,13 @@
 const Router = require("express").Router();
 const { ensureAuthenticated, ensureIsAdmin } = require('../../config/auth');
+const Project = require("../../models/projectModel");
 
 
 Router.get("/", ensureAuthenticated, ensureIsAdmin, (req, res) => {
-    res.render("project/index", { project: 1, req })
+    Project.find()
+        .then(project => {
+            return res.render("project/index", { project, req })
+        })
 });
 
 module.exports = Router;
