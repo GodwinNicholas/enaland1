@@ -75,9 +75,6 @@ Router.post("/transaction", ensureAuthenticated, ensureIsAdmin, (req, res) => {
 
             }
         })
-
-
-
     res.redirect("/admin")
 });
 
