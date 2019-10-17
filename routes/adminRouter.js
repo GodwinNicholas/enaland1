@@ -22,7 +22,7 @@ Router.post("/transaction", ensureAuthenticated, ensureIsAdmin, (req, res) => {
         return res.redirect('/admin');
     }
 
-    if (transaction == "Deposit" && req.user.cash < amount) {
+    if (transaction == "Deposit" && parseInt(req.user.cash.replace(/[,-]/g, "")) < amount) {
         req.flash(
             'error_msg',
             'You do not have sufficient funds'
@@ -42,7 +42,7 @@ Router.post("/transaction", ensureAuthenticated, ensureIsAdmin, (req, res) => {
                 }
 
                 if (transaction == "Withdraw") {
-                    const newCash = parseInt(user.cash) - parseInt(amount.replace(/[-,a-zA-Z]/g, ""));
+                    const newCash = parseInt(user.cash.replace(/[-,a-zA-Z]/g, "")) - parseInt(amount.replace(/[-,a-zA-Z]/g, ""));
                     const newAdminCash = parseInt(req.user.cash) + parseInt(amount.replace(/[-,a-zA-Z]/g, ""));
                     User.updateOne({ _id: user }, { cash: newCash }, { upsert: true })
                         .then(() => {
@@ -58,7 +58,7 @@ Router.post("/transaction", ensureAuthenticated, ensureIsAdmin, (req, res) => {
                 }
 
                 if (transaction == "Deposit") {
-                    const newCash = parseInt(user.cash) + parseInt(amount.replace(/[-,a-zA-Z]/g, ""));
+                    const newCash = parseInt(user.cash.replace(/[-,a-zA-Z]/g, "")) + parseInt(amount.replace(/[-,a-zA-Z]/g, ""));
                     const newAdminCash = parseInt(req.user.cash) - parseInt(amount.replace(/[-,a-zA-Z]/g, ""));
                     User.updateOne({ _id: user }, { cash: newCash }, { upsert: true })
                         .then(() => {
