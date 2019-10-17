@@ -33,7 +33,7 @@ Router.post("/transaction", ensureAuthenticated, ensureIsAdmin, (req, res) => {
     User.findOne({ _id: user })
         .then(user => {
             if (user) {
-                if (transaction == "Withdraw" && user.cash < amount) {
+                if (transaction == "Withdraw" && pareseInt(user.cash) < amount) {
                     req.flash(
                         'error_msg',
                         'User does not have sufficient funds'

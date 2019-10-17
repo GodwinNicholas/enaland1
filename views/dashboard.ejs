@@ -73,9 +73,23 @@
                 <h4><span class="badge bg-info text-white"><%= transData.numTransToday %> </span> Transfers </h4>
                 <h3 class="text-warning" id="num3">N<%= transData.transToday %> </h3>
             </div>
-            <div class="rounded">
+            <div class="rounded ex1">
                 <h4>Profit</h4>
                 <h3 class="text-success" id="num4">N<%= transData.profitsToday %></h3>
+            </div>
+        </div>
+        <div class="dashboardT2">
+            <div class="rounded">
+                <h4>Current Balance</h4>
+                <h3 class="text-success" id="num4">
+                    N<%= parseInt(transData.creditToday) - (parseInt(transData.transToday) + parseInt(transData.debitsToday)) %>
+                </h3>
+            </div>
+            <div class="rounded ex2">
+                <h4> Totol Balance</h4>
+                <h3 class="text-success" id="num4">
+                    N<%= (parseInt(transData.creditToday) - (parseInt(transData.transToday) + parseInt(transData.debitsToday))) + transData.profitsToday%>
+                </h3>
             </div>
         </div>
     </div>

@@ -76,13 +76,23 @@ h1,h2,h3,h4{
 }
 
 .dashboardT{
-    display: flex;
+    display: grid;
+    grid-template-columns: 24% 24% 24% 24%;
+    grid-gap: 1%;
 }
 
+.dashboardT2{
+    display: grid;
+    grid-template-columns: 49% 49%;
+    grid-gap: 1%;
+}
 .dashboardT > div{
     background: #fff;
-    flex-basis: 33%;
-    margin: 1em;
+    padding: 1em;
+}
+.dashboardT2 > div{
+    margin-top: 1rem;
+    background: #fff;
     padding: 1em;
 }
 

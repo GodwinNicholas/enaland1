@@ -43,11 +43,13 @@
                     </button>
                 </form>
             </li>
-            <li class="nav-item">
-                <input class="cashnav" type="text" value="<% req.user.cash %>" readonly
-                    style="background: transparent; color: yellow; font-weight: bold;" />
-            </li>
-
+            <div class="userDetail">
+                <li class="nav-item">
+                    <span class="pl-5 text-white" style="font-size: 1.4em;">Cash left: </span>: <input class="cashnav"
+                        type="text" value="<%= req.user.cash %>" readonly
+                        style="background: transparent; color: yellow; font-size: 1.3em; border: none;" />
+                </li>
+            </div>
         </ul>
     </div>
 </nav>
@@ -75,6 +77,16 @@
         </div>
     </div>
     <div class="action-btn container">
+        <!-- delete project -->
+        <div class="container mx-5 p-5">
+            <p class="lead">Delete Project</p>
+            <form action="/project/detail/d" method="post">
+                <input type="hidden" name="id" value="<%= project.id %>">
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-trash"></i>
+                    Delete Project</button>
+            </form>
+        </div>
         <button class="btn btn-info left" data-toggle="modal" data-target="#exampleModal1">
             <i class="fas fa-plus"></i>
             Add Expenses
@@ -98,7 +110,12 @@
                     <td>(₦) <%= e.amount %></td>
                     <td><%= e.category %></td>
                     <td>
-                        <a href="/" class="btn btn-danger">Remove</a>
+                        <form action="/project/detail/expenses/d" method="post">
+                            <input type="hidden" name="id" , value="<%= project._id %>">
+                            <input type="hidden" name="e_id" value="<%= e.id %>">
+                            <input type="hidden" name="amt" value="<%= e.amount %>">
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
                     </td>
                 </tr>
                 <% }) %>
@@ -124,7 +141,7 @@
             </div>
             <div class="modal-body">
                 <div id="my_camera" style="width: auto; height: auto;"></div>
-                <form action="/project/detail/expenses/<%= project._id %>" , method="POST">
+                <form action="/project/detail/expenses/" , method="POST">
                     <input type="hidden" name="imgURI" value="" id="result">
                     <input type="hidden" name="date" value="" id="dateInput">
                     <div class="form-row">
@@ -151,6 +168,7 @@
                                 <% }) %>
                             </select>
                         </div>
+                        <input type="hidden" name="id" , value="<%= project._id %>">
                     </div>
                     <button class="btn btn-primary" type="submit">Save</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
