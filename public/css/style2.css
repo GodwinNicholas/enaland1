@@ -1,0 +1,104 @@
+body {
+    background: rgb(66, 65, 65);
+    font-family: 'Roboto', sans-serif;
+}
+
+.footer{
+    font-weight: bold;
+    font-size: 1.4em;
+}
+
+/* nabvar */
+.nav-week{
+    position: absolute;
+    right: 1em;
+    font-weight: bold;
+}
+
+
+/* uttlities */
+.text-bold{
+    font-weight: bold;
+}
+
+/* prematch */
+.prematch{
+    background: #000;
+    width: 80%;
+    margin: 2rem auto;
+    padding: 20px;
+    color: #fff;
+}
+
+.grid-layout{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+/* match styles */
+
+.first{
+    display: grid;
+    grid-template-columns: 40% 19% 40%;
+    padding: 1em 2em;
+}
+
+.first .stake{
+    text-align: center;
+}
+
+.first .win{
+    text-align: center;
+}
+
+.time {
+    background: rgb(5, 95, 122);
+    color: #fff;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: right;
+    margin: auto;
+}
+
+table{
+    text-align: center;
+    transition: .8s ease;
+}
+
+img{
+    width: 4rem;
+}
+
+
+.blink{
+    animation-name: blink;
+    animation-duration: .4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+    animation-direction: alternate-reverse;
+}
+
+.result-section{
+    position: absolute;
+    width: 100%;
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+}
+
+
+@keyframes blink {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}

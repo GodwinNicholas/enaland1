@@ -11,7 +11,8 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 
-// import routes
+// IMPORT ROUTES
+// import POS routes
 const indexRouter = require("./routes/indexRouter");
 const adminRouter = require("./routes/adminRouter");
 const dashboardRouter = require("./routes/dashboardRouter");
@@ -23,7 +24,9 @@ const ticketRouter = require("./routes/ticketRouter");
 const projectIndexRouter = require("./routes/project/index");
 const projectCreateRouter = require("./routes/project/createProject");
 const projectDetailRouter = require("./routes/project/projectDetail");
-// rs
+
+//impport routes for cornerBet
+const cornerBetIndexRouter = require("./routes/cornerBet/index");
 
 // middlewares
 app.use(expressLayouts);
@@ -91,6 +94,9 @@ app.use("/ticket", ticketRouter);
 app.use("/project", projectIndexRouter);
 app.use("/project/create", projectCreateRouter);
 app.use("/project/detail", projectDetailRouter);
+
+// cornerBet Routes
+app.use("/cornerBet", cornerBetIndexRouter);
 // app.user("*", "notFound")
 
 
