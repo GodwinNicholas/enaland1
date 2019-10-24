@@ -7,7 +7,7 @@ Router.get("/", ensureAuthenticated, ensureIsAdmin, (req, res) => {
     Users.find({ isAdmin: false })
         .then(users => {
             return res.render("admin", { req, users });
-        })
+        });
 });
 
 
