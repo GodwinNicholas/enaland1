@@ -89,7 +89,6 @@ function beginMaster(names, stake, potWin) {
                     })()
                 }
                 if (gameData.timer >= 90) {
-                    gameData.timer++;
                     time.innerHTML = gameData.timer;
                     getWinner(gameData.players);
                     marquee(gameData.players[0]);
