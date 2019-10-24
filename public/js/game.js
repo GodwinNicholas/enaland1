@@ -6,7 +6,10 @@ import preventDraws from "./preventDraws.js";
 import marquee from "./marquee.js";
 import updateHTMLOnly from "./updateHTMLOnly.js";
 import getWinner from "./getWinner.js";
-import speakOut from "./textToSpeach.js";
+// import speakOut from "./textToSpeach.js";
+
+// api modules
+import postBet from "./ajax/main.js";
 
 function beginMaster(names, stake, potWin) {
     // dom elements
@@ -30,12 +33,11 @@ function beginMaster(names, stake, potWin) {
 
     // first function
     init(potWin);
-    function init(potWin) {
+    async function init(potWin) {
 
         // add players to players array
-        randomizer(names.split(" ")).forEach((e, index) => {
+        await randomizer(names.split(" ")).forEach((e, index) => {
             gameData.players.push({
-                _id: Math.random().toString(36),
                 name: e,
                 shortName: e.slice(0, 4),
                 stake,
@@ -45,6 +47,7 @@ function beginMaster(names, stake, potWin) {
                 logo: `${gameData.randLogos[index]}.png`
             });
         });
+
         startGame();
     }
 
@@ -60,7 +63,6 @@ function beginMaster(names, stake, potWin) {
             if (gameData.timer <= 90) {
                 time.innerHTML = gameData.timer;
                 gameData.timer++;
-                console.log(gameData.players);
 
 
                 // check for fulltime
@@ -83,13 +85,13 @@ function beginMaster(names, stake, potWin) {
                         gameData.players = await preventDraws(gameData.players);
                         await updateScores(playerInfo.index);
                         updateHTMLOnly(gameData.players[0]);
-                        console.log("final score", gameData.players);
                     })()
                 }
                 if (gameData.timer >= 90) {
+                    gameData.timer++;
                     getWinner(gameData.players);
-                    clearInterval(interv);
                     marquee(gameData.players[0]);
+                    clearInterval(interv);
                 }
 
             }

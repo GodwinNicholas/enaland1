@@ -1,5 +1,7 @@
 import beginMaster from "./game.js";
 
+import postBet from "./ajax/main.js";
+
 
 const start = document.querySelector("#start");
 const players = document.querySelector(".players");
@@ -25,7 +27,11 @@ startBtn.addEventListener("click", e => {
         alert("fill all fields");
         return;
     }
-    beginMaster(startData.players, startData.stake, startData.pay_win);
+
+    (async function () {
+        await postBet(startData.players, startData.stake, startData.pay_win, beginMaster);
+        setTimeout(beginMaster(startData.players, startData.stake, startData.pay_win), 10000);
+    })();
 });
 
 

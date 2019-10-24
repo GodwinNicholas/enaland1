@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css?family=ABeeZee&display=swap" rel="stylesheet" crossorigin="anonymous">
 
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style2.css">
     <title>Enaland NIG Limited</title>
 </head>
 
@@ -50,6 +51,7 @@
             ordering: false
         });
 
+
         $(document).ready(function () {
             $("#printButton").click(function () {
                 var mode = 'iframe'; //popup
@@ -57,12 +59,14 @@
                 var options = { mode: mode, popClose: close };
                 $("#printableArea").removeClass("smalls");
                 $("#printableArea").addClass("big");
+                $("#printableArea2").addClass("big");
                 $("#printableArea").printArea(options);
+                $("#printableArea2").printArea(options);
                 $("#printableArea").removeClass("big");
+                $("#printableArea2").removeClass("big");
                 $("#printableArea").addClass("smalls");
             });
         });
-
     </script>
 </body>
 

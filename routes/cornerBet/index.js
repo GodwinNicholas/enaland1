@@ -1,31 +1,50 @@
 const express = require("express");
-const router = express.Router();
+const Router = express.Router();
+const Bet = require("../../models/cornerBetModel");
 
-
-router.get("/", (req, res) => {
-    return res.send("cornerBet/index.html");
+// Express body parser
+Router.get("/", (req, res) => {
+    Bet.find({})
+        .then(bets => {
+            return res.render("cornerBet/index", { bets });
+        })
 });
 
-
-
-// rest apis
-
-// fetch tickets from database
-router.get("/ticket", (req, res) => {
-
-});
-
+// rest api
 // push ticket to database
-router.post("/ticket", (req, res) => {
+Router.get("/ticket/:players/:stake/:potWin/:date", (req, res) => {
+    const { potWin, stake, date, players } = req.params;
+    if (!potWin) {
+        return res.redirect("/cornerBet");
+    }
+    newBet = new Bet({
+        players,
+        potWin,
+        date,
+        stake
+    });
 
+    newBet.save()
+        .then(() => {
+            return res.send(newBet);
+        });
 });
 
+Router.get("/ticket/print/:id", (req, res) => {
+    if (!req.params.id) {
+        return res.redirect("/cornerBet");
+    }
+    Bet.findOne({ _id: req.params.id }, (err, ticket) => {
+        players = ticket.players.split(" ");
+        return res.render("cornerBet/ticketPage", { ticket, players });
+    });
+});
 
 // update recently added tickests
-router.post("/ticket/update", (req, res) => {
+Router.post("/ticket/update", (req, res) => {
 
 });
 
 
-module.exports = router;
+module.exports = Router;
 

@@ -81,7 +81,6 @@ app.use(function (req, res, next) {
 });
 
 
-
 // Routes
 app.use("/", indexRouter);
 app.use("/admin", adminRouter);
@@ -90,13 +89,14 @@ app.use("/users", usersRouter);
 app.use("/auth", authRouter);
 app.use("/ticket", ticketRouter);
 
+// cornerBet Routes
+app.use("/cornerBet", cornerBetIndexRouter);
+
 // budget routes
 app.use("/project", projectIndexRouter);
 app.use("/project/create", projectCreateRouter);
 app.use("/project/detail", projectDetailRouter);
 
-// cornerBet Routes
-app.use("/cornerBet", cornerBetIndexRouter);
 // app.user("*", "notFound")
 
 
