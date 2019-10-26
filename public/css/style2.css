@@ -53,14 +53,15 @@ body {
 .time {
     background: rgb(5, 95, 122);
     color: #fff;
-    width: 4rem;
-    height: 4rem;
+    width: 7rem;
+    height: 7rem;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: right;
     margin: auto;
+    font-size: 2em;
 }
 
 table{

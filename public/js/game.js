@@ -7,7 +7,6 @@ import preventDraws from "./preventDraws.js";
 import marquee from "./marquee.js";
 import updateHTMLOnly from "./updateHTMLOnly.js";
 import getWinner from "./getWinner.js";
-// import speakOut from "./textToSpeach.js";
 
 function beginMaster(names, stake, potWin) {
     // dom elements
@@ -135,7 +134,7 @@ function beginMaster(names, stake, potWin) {
                     </tr>       
         `;
 
-            }
+            };
 
             matchTable.innerHTML = `
             <div class="container">
