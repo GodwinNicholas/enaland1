@@ -79,7 +79,7 @@ function beginMaster(names, stake, potWin) {
 
                 if (gameData.timer == 83) {
                     (async function () {
-                        gameData.players = await preventDraws(gameData.players);
+                        // gameData.players = await preventDraws(gameData.players);
                         await updateScores(playerInfo.index);
                         updateHTMLOnly(gameData.players[0]);
                     })()
