@@ -5,19 +5,25 @@ const { ensureAuthenticated, ensureIsAdmin } = require("../../config/auth");
 
 // Express body parser
 Router.get("/", ensureAuthenticated, (req, res) => {
+
+    const apiObject = {
+        week: null,
+        bets: null
+    };
     Bet.find({})
         .then(bets => {
-            return res.render("cornerBet/index", { bets });
+            apiObject.bets = bets;
+            Bet.countDocuments()
+                .then(w => {
+                    apiObject.week = w;
+                    return res.render("cornerBet/index", apiObject);
+                });
         })
 });
 
 // rest api
 // get week
 Router.get("/week", (req, res) => {
-    Bet.countDocuments()
-        .then(w => {
-            return res.send(w.toString());
-        });
 });
 
 // push ticket to database
