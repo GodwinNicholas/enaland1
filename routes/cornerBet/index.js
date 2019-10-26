@@ -1,7 +1,7 @@
 const express = require("express");
 const Router = express.Router();
-const Bet = require("../../../models/cornerBetModel");
-const { ensureAuthenticated, ensureIsAdmin } = require('../config/auth');
+const Bet = require("../../models/cornerBetModel");
+const { ensureAuthenticated, ensureIsAdmin } = require("../../config/auth");
 
 // Express body parser
 Router.get("/", ensureAuthenticated, (req, res) => {
