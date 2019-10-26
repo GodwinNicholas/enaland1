@@ -30,7 +30,7 @@ startBtn.addEventListener("click", e => {
 
     (async function () {
         await postBet(startData.players, startData.stake, startData.pay_win, beginMaster);
-        setTimeout(beginMaster(startData.players, startData.stake, startData.pay_win), 10000);
+        // setTimeout(beginMaster(startData.players, startData.stake, startData.pay_win), 10000);
     })();
 });
 
