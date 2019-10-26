@@ -9,9 +9,6 @@ import updateHTMLOnly from "./updateHTMLOnly.js";
 import getWinner from "./getWinner.js";
 // import speakOut from "./textToSpeach.js";
 
-// api modules
-import postBet from "./ajax/main.js";
-
 function beginMaster(names, stake, potWin) {
     // dom elements
     const matchTable = document.getElementsByClassName("match-table")[0];
@@ -49,10 +46,6 @@ function beginMaster(names, stake, potWin) {
                 week: 0,
             });
         });
-        (async function () {
-            const getWeek = await fetch("https://enaland.com/cornerBet/week");
-            gameData.week = await getWeek.text;
-        })();
         startGame();
     }
 
