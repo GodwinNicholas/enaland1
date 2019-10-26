@@ -13,8 +13,11 @@ Router.get("/", ensureAuthenticated, (req, res) => {
 
 // rest api
 // get week
-Router.get("/week", ensureAuthenticated, (req, res) => {
-    return res.send(Bet.find().count());
+Router.get("/week", (req, res) => {
+    Bet.countDocuments()
+        .then(w => {
+            return res.send(w.toString());
+        });
 });
 
 // push ticket to database
