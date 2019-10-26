@@ -79,7 +79,7 @@ function beginMaster(names, stake, potWin) {
 
                 if (gameData.timer == 83) {
                     (async function () {
-                        gameData.players = await preventDraws(gameData.players);
+                        // gameData.players = await preventDraws(gameData.players);
                         await updateScores(playerInfo.index);
                         updateHTMLOnly(gameData.players[0]);
                     })()
@@ -87,7 +87,12 @@ function beginMaster(names, stake, potWin) {
                 if (gameData.timer >= 90) {
                     time.innerHTML = gameData.timer;
                     getWinner(gameData.players);
-                    marquee(gameData.players[0]);
+                    if (gameData.players[0].score == gameData.players[1].score) {
+                        marquee(404);
+                    }
+                    else {
+                        marquee(gameData.players[0]);
+                    }
                     clearInterval(interv);
                     //reset gamedata
                     gameData.players = [];
@@ -98,7 +103,7 @@ function beginMaster(names, stake, potWin) {
                         const getWeek = await fetch("https://enaland.com/cornerBet/week");
                         gameData.week = await getWeek.text;
                     })();
-                    // setTimeout(() => window.location.reload(), 5000);
+                    setTimeout(() => window.location.reload(), 7000);
                 }
             }
         }, 800);
