@@ -98,9 +98,8 @@ function beginMaster(names, stake, potWin) {
                     (async function () {
                         const getWeek = await fetch("https://enaland.com/cornerBet/week");
                         gameData.week = await getWeek.text;
-                        console.log(gameData.week);
                     })();
-                    setTimeout(() => window.location.reload(), 5000);
+                    // setTimeout(() => window.location.reload(), 5000);
                 }
             }
         }, 800);
