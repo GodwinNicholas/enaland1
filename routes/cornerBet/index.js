@@ -1,9 +1,10 @@
 const express = require("express");
 const Router = express.Router();
-const Bet = require("../../models/cornerBetModel");
+const Bet = require("../../../models/cornerBetModel");
+const { ensureAuthenticated, ensureIsAdmin } = require('../config/auth');
 
 // Express body parser
-Router.get("/", (req, res) => {
+Router.get("/", ensureAuthenticated, (req, res) => {
     Bet.find({})
         .then(bets => {
             return res.render("cornerBet/index", { bets });
@@ -11,8 +12,14 @@ Router.get("/", (req, res) => {
 });
 
 // rest api
+// get week
+Router.get("/week", ensureAuthenticated, (req, res) => {
+    return res.send(Bet.find().count());
+});
+
 // push ticket to database
-Router.get("/ticket/:players/:stake/:potWin/:date", (req, res) => {
+
+Router.get("/ticket/:players/:stake/:potWin/:date", ensureAuthenticated, (req, res) => {
     const { potWin, stake, date, players } = req.params;
     if (!potWin) {
         return res.redirect("/cornerBet");
