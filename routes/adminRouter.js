@@ -44,9 +44,9 @@ Router.post("/transaction", ensureAuthenticated, ensureIsAdmin, (req, res) => {
                 if (transaction == "Withdraw") {
                     const newCash = parseInt(user.cash.replace(/[-,a-zA-Z]/g, "")) - parseInt(amount.replace(/[-,a-zA-Z]/g, ""));
                     const newAdminCash = parseInt(req.user.cash) + parseInt(amount.replace(/[-,a-zA-Z]/g, ""));
-                    User.updateOne({ _id: req.user._id }, { cash: newAdminCash }, { upsert: true })
+                    User.updateOne({ _id: user.id }, { cash: newCash }, { upsert: true })
                         .then(() => {
-                            User.updateOne({ _id: user }, { cash: newCash }, { upsert: true })
+                            User.updateOne({ _id: req.user.id }, { cash: newAdminCash }, { upsert: true })
                                 .then(() => {
                                     req.flash(
                                         'success_msg',
@@ -60,9 +60,9 @@ Router.post("/transaction", ensureAuthenticated, ensureIsAdmin, (req, res) => {
                 if (transaction == "Deposit") {
                     const newCash = parseInt(user.cash.replace(/[-,a-zA-Z]/g, "")) + parseInt(amount.replace(/[-,a-zA-Z]/g, ""));
                     const newAdminCash = parseInt(req.user.cash) - parseInt(amount.replace(/[-,a-zA-Z]/g, ""));
-                    User.updateOne({ _id: user }, { cash: newCash }, { upsert: true })
+                    User.updateOne({ _id: user.id }, { cash: newCash }, { upsert: true })
                         .then(() => {
-                            User.updateOne({ _id: req.user }, { cash: newAdminCash }, { upsert: true })
+                            User.updateOne({ _id: req.user.id }, { cash: newAdminCash }, { upsert: true })
                                 .then(() => {
                                     req.flash(
                                         'success_msg',
