@@ -128,7 +128,6 @@
                                 <label for="inputStatus">User</label>
                                 <select id="inputStatus" class="form-control" name="user">
                                     <option selected></option>
-
                                     <% users.forEach(user => { %>
                                     <option value="<%= user._id %>"><%= user.firstname %> <%= user.lastname %>
                                         (<%= user.cash %>)</option>
