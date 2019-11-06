@@ -3,7 +3,7 @@
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand ml-5 firstmoney" href="/">
-        <span class="text-info">Enaland NIG </span><span class="text-warning">Limited</span>
+        <span class="text-info">Enaland NIG </span><span class="text-warning">LIMITED</span>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,7 +81,7 @@
         style="width: 100%; display: flex; flex-direction: column; height: 100vh; width: 100vw; justify-content: center; align-items: center; margin: auto">
         <div class="container rounded py-3 smalls" id="printableArea">
             <div class="logo-wrap">
-                <h1>ENALAND NIG LIMITED</h1>
+                <h1>ENALAND BANKING SYSTEM</h1>
             </div>
 
             <div class="ticket">
@@ -96,7 +96,9 @@
                 <div>ATTENDANT NAME <span class="col">:</span></div>
                 <div><%= ticket.cashier.firstname %> <%= ticket.cashier.lastname %></div>
                 <div>ACCOUNT NUMBER <span class="col">:</span></div>
-                <div>***********<%= ticket.accNum %></div>
+                <div><%= padAccountNum(ticket.accNum) %></div>
+                <div>REFERENCE NUMBER <span class="col">:</span></div>
+                <div><%= padRefNum(ticket.refNum) %></div>
                 <div>BANK NAME <span class="col">:</span></div>
                 <div><%= ticket.bankName %></div>
                 <div>PHONE NUMBER:</div>
