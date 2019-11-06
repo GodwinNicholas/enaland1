@@ -3,10 +3,14 @@ const { ensureAuthenticated, ensureIsAdmin } = require("../config/auth");
 const Transaction = require("../models/transactionModel");
 const moment = require("moment");
 
+// utils
+const padRefNum = require("../utils/padRefNum");
+const padAccountNum = require("../utils/paddAccountNum");
+
 Router.get("/:id", ensureAuthenticated, (req, res) => {
     const id = req.params.id;
     Transaction.findById(id, (err, ticket) => {
-        return res.render("ticketDetails", { req, ticket, moment });
+        return res.render("ticketDetails", { req, ticket, moment, padAccountNum, padRefNum });
     })
 });
 
