@@ -69,16 +69,16 @@ Router.get("/:username?", ensureAuthenticated, ensureIsAdmin, (req, res) => {
                             transData.numCreditThisMonth += 1;
                             transData.profitsThisMonth = parseInt(transData.profitsThisMonth) + parseInt(tran.fee);
                         })
-                    })
-            }).then(() => {
-                Transaction.find({ card: "Transfer", month: new Date().getMonth() + 1 })
-                    .then(trans => {
-                        trans.forEach(tran => {
-                            transData.transThisMonth = parseInt(transData.transThisMonth) + parseInt(tran.amount);
-                            transData.numTransThisMonth += 1;
-                        })
                     }).then(() => {
-                        return res.render("dashboard", { req, transData });
+                        Transaction.find({ card: "Transfer", month: new Date().getMonth() + 1 })
+                            .then(trans => {
+                                trans.forEach(tran => {
+                                    transData.transThisMonth = parseInt(transData.transThisMonth) + parseInt(tran.amount);
+                                    transData.numTransThisMonth += 1;
+                                })
+                            }).then(() => {
+                                return res.render("dashboard", { req, transData });
+                            })
                     })
             })
     }

@@ -25,7 +25,6 @@ Router.get("/", ensureAuthenticated, (req, res) => {
 Router.post("/findByDate", (req, res) => {
     const user = req.user;
     const { fromDate, toDate } = req.body;
-    console.log(fromDate, toDate)
     if (!user.isAdmin) {
         Transaction.find({ date: { $gte: new Date(`${fromDate}:00`).toISOString(), $lte: new Date(`${toDate}:00`).toISOString() }, ["cashier._id"]: user._id })
             .then(trans => {

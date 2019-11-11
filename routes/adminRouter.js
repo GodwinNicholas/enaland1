@@ -7,7 +7,7 @@ Router.get("/", ensureAuthenticated, ensureIsAdmin, (req, res) => {
     Users.find({ isAdmin: false })
         .then(users => {
             return res.render("admin", { req, users });
-        })
+        });
 });
 
 
@@ -33,13 +33,14 @@ Router.post("/transaction", ensureAuthenticated, ensureIsAdmin, (req, res) => {
     User.findOne({ _id: user })
         .then(user => {
             if (user) {
-                // if (transaction == "Withdraw" && user.cash < amount) {
-                //     req.flash(
-                //         'error_msg',
-                //         'User does not have sufficient funds'
-                //     );
-                //     return res.redirect("/admin");
-                // }
+                if (transaction == "Withdraw" && pareseInt(user.cash) < amount) {
+                    req.flash(
+                        'error_msg',
+                        'User does not have sufficient funds'
+                    );
+                    return res.redirect("/admin");
+                }
+
 
                 if (transaction == "Deposit") {
                     const newCash = parseInt(user.cash.replace(/[-,a-zA-Z]/g, "")) + parseInt(amount.replace(/[-,a-zA-Z]/g, ""));
@@ -74,13 +75,8 @@ Router.post("/transaction", ensureAuthenticated, ensureIsAdmin, (req, res) => {
                 }
 
             }
-        }).catch(err => console.log(err))
-
-
-
-    res.redirect("/admin")
-});
-
+        })
+})
 
 
 
