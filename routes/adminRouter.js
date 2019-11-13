@@ -31,21 +31,28 @@ Router.post("/transaction", ensureAuthenticated, ensureIsAdmin, (req, res) => {
     }
 
     User.findOne({ _id: user })
-        .then(user => {
-            if (user) {
-                if (transaction == "Withdraw" && pareseInt(user.cash) < amount) {
+        .then(u => {
+            if (u) {
+                if (transaction == "Withdraw" && u.cash < amount) {
                     req.flash(
                         'error_msg',
                         'User does not have sufficient funds'
                     );
                     return res.redirect("/admin");
                 }
+                if (transaction == "Deposit" && amount > req.user.cash) {
+                    req.flash(
+                        'error_msg',
+                        'You do not have sufficient funds'
+                    );
+                    return res.redirect("/admin");
+                }
 
 
                 if (transaction == "Deposit") {
-                    const newCash = parseInt(user.cash.replace(/[-,a-zA-Z]/g, "")) + parseInt(amount.replace(/[-,a-zA-Z]/g, ""));
+                    const newCash = parseInt(u.cash.replace(/[-,a-zA-Z]/g, "")) + parseInt(amount.replace(/[-,a-zA-Z]/g, ""));
                     const newAdminCash = parseInt(req.user.cash) - parseInt(amount.replace(/[-,a-zA-Z]/g, ""));
-                    User.updateOne({ _id: user.id }, { cash: newCash }, { upsert: true })
+                    User.updateOne({ _id: u.id }, { cash: newCash }, { upsert: true })
                         .then(() => {
                             User.updateOne({ _id: req.user.id }, { cash: newAdminCash }, { upsert: true })
                                 .then(() => {
@@ -59,9 +66,9 @@ Router.post("/transaction", ensureAuthenticated, ensureIsAdmin, (req, res) => {
                 }
 
                 if (transaction == "Withdraw") {
-                    const newCash = parseInt(user.cash.replace(/[-,a-zA-Z]/g, "")) - parseInt(amount.replace(/[-,a-zA-Z]/g, ""));
+                    const newCash = parseInt(u.cash.replace(/[-,a-zA-Z]/g, "")) - parseInt(amount.replace(/[-,a-zA-Z]/g, ""));
                     const newAdminCash = parseInt(req.user.cash) + parseInt(amount.replace(/[-,a-zA-Z]/g, ""));
-                    User.updateOne({ _id: user.id }, { cash: newCash }, { upsert: true })
+                    User.updateOne({ _id: u.id }, { cash: newCash }, { upsert: true })
                         .then(() => {
                             User.updateOne({ _id: req.user.id }, { cash: newAdminCash }, { upsert: true })
                                 .then(() => {
@@ -75,7 +82,7 @@ Router.post("/transaction", ensureAuthenticated, ensureIsAdmin, (req, res) => {
                 }
 
             }
-        })
+        }).catch(err => console.log(err))
 })
 
 
